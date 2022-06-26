@@ -7,9 +7,13 @@ import {LoginComponent} from './component/login/login.component'
 import { SignupComponent } from './component/signup/signup.component';
 import { UsersComponent } from './component/manage/users/users.component';
 import { AdminComponent } from './component/admin/admin.component';
+import { HomeComponent } from './component/home/home.component';
+import { ProductCategoryComponent } from './component/product-category/product-category.component';
+import { WishlistComponent } from './component/wishlist/wishlist.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'products' },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'admin', component: AdminComponent },
@@ -17,7 +21,9 @@ const routes: Routes = [
   { path: 'admin/manage/products', component: ManageProductsComponent },
   // {path:'', redirectTo: 'products',pathMatch: 'full'},
   {path:'products', component: ProductsComponent},
-  {path:'cart' , component: CartComponent}
+  {path:'product/category', component: ProductCategoryComponent},
+  {path:'cart' , component: CartComponent},
+  {path:'wishlist' , component: WishlistComponent},
 
 ];
 

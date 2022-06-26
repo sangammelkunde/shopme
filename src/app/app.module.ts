@@ -14,6 +14,10 @@ import { SignupComponent } from './component/signup/signup.component';
 import { UsersComponent } from './component/manage/users/users.component';
 import { ManageProductsComponent } from './component/manage/products/products.component';
 import { AdminComponent } from './component/admin/admin.component';
+import { HomeComponent } from './component/home/home.component';
+import { ProductCategoryComponent } from './component/product-category/product-category.component';
+import { WishlistComponent } from './component/wishlist/wishlist.component';
+import { FooterComponent } from './component/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { AdminComponent } from './component/admin/admin.component';
     SignupComponent,
     UsersComponent,
     ManageProductsComponent,
-    AdminComponent
+    AdminComponent,
+    HomeComponent,
+    ProductCategoryComponent,
+    WishlistComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -41,12 +41,13 @@ export class LoginComponent implements OnInit {
       this._http.post<any>('http://localhost:8080/login', { username: this.loginForm.value.userName, password: this.loginForm.value.password}, {headers}).subscribe(data => {
         this.retData = data.role;
         console.log(this.retData)
-        window.sessionStorage.setItem('login', 'true');
+        window.localStorage.setItem('login', 'true');
+        window.localStorage.setItem('role', this.retData);
         // this.loginForm.reset();
         if("ADMIN" === this.retData){
           this.router.navigate(['/admin']);
         } else {
-          this.router.navigate(['/products']);
+          this.router.navigate(['/home']);
         }
     })
     }

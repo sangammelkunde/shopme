@@ -11,14 +11,25 @@ import { Router } from '@angular/router';
 export class ManageProductsComponent implements OnInit {
 
   searchForm!: FormGroup;
+  addProductForm!: FormGroup;
   retData: any;
+  addButtonClickedFlag: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private _http: HttpClient,
     private router: Router) {}
 
   ngOnInit(): void {
+    this.getAllProducts();
     this.searchForm = this.formBuilder.group({
       category: [''],
+    });
+    this.addProductForm = this.formBuilder.group({
+      name: [''],
+      price: [''],
+      desc: [''],
+      category: [''],
+      image: [''],
+      stock: [''],
     });
   }
 
@@ -44,6 +55,40 @@ export class ManageProductsComponent implements OnInit {
       this._http.get<any>('http://localhost:8081/products/category?category='.concat(this.searchForm.value.category), {headers}).subscribe(data => {
         this.retData = data;
     })
+  }
+
+  async addProduct(){
+    const headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' };
+    this._http.post<any>('http://localhost:8081/add/product',
+      {
+        name: this.addProductForm.value.name,
+        price: this.addProductForm.value.price,
+        description: this.addProductForm.value.desc,
+        category: this.addProductForm.value.category,
+        imageURL: this.addProductForm.value.image,
+        stock: this.addProductForm.value.stock
+      }, {headers}).subscribe(data => {
+        // this.retData = data;
+        console.log(data)
+        if(data !== undefined) {
+          this.getAllProducts();
+          this.addButtonClickedFlag = false;
+        }
+        // this.loginForm.reset();
+        // if("ADMIN" === this.retData){
+        //   this.router.navigate(['/admin']);
+        // } else {
+        //   this.router.navigate(['/home']);
+        // }
+    })
+  }
+
+  addButtonClicked(){
+    this.addButtonClickedFlag = !this.addButtonClickedFlag;
+  }
+
+  cancelButtonClicked(){
+    this.addButtonClickedFlag = !this.addButtonClickedFlag;
   }
 
 }

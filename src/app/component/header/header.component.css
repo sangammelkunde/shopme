@@ -12,3 +12,9 @@
   color: blue;
 }
 
+.btn-admin{
+  float: right;
+  background-color:white;
+  color: blue;
+  font-weight: bold;
+}

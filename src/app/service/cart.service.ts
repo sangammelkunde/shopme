@@ -7,12 +7,18 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
 
   public cartItemList : any=[]
+  public wishList : any=[]
   public productList = new BehaviorSubject<any>([]);
+  public productWishList = new BehaviorSubject<any>([]);
 
   constructor() { }
+  
   getProduct(){
     return this.productList.asObservable();
+  }
 
+  getWishlist(){
+    return this.productWishList.asObservable();
   }
 
   setProduct(product : any){
@@ -26,6 +32,12 @@ export class CartService {
     this.productList.next(this.cartItemList)
     this.getTotalPrice();
     console.log(this.cartItemList)
+  }
+
+  addToWishlist(product : any){
+    this.wishList.push(product);
+    this.productWishList.next(this.wishList)
+    console.log("wishlsit",this.wishList)
   }
 
   getTotalPrice() : number{

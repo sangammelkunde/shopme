@@ -16,6 +16,13 @@ export class ApiService {
     }))
     }
 
+    getProductByCategory(category: string) {
+      return this.http.get<any>('http://localhost:8081/products/category?category='.concat(category))
+    .pipe(map((res:any)=>{
+      return res;
+    }))
+    }
+
     login(username: string, password: string){
       const headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' };
       return this.http.post<any>('http://localhost:8080/login', { username: username, password: password}, {headers}).subscribe(data => {

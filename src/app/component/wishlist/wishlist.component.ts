@@ -2,21 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/service/cart.service';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  selector: 'app-wishlist',
+  templateUrl: './wishlist.component.html',
+  styleUrls: ['./wishlist.component.css']
 })
-export class CartComponent implements OnInit {
+export class WishlistComponent implements OnInit {
+
   public product : any = [];
-  public grandTotal !: number;
 
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.cartService.getProduct()
+    this.cartService.getWishlist()
     .subscribe(res=>{
       this.product=res;
-      this.grandTotal = this.cartService.getTotalPrice();
     })
   }
   removeItem(item: any){
@@ -25,15 +24,6 @@ export class CartComponent implements OnInit {
 
   emptycart(){
     this.cartService.removeAllCart();
-  }
-
-  increaseQuantity(item: any){
-    item.quantity++;
-  }
-
-  decreaseQuantity(item: any){
-    if(item.quantity != 0)
-      item.quantity--;
   }
 
 }
