@@ -21,9 +21,9 @@
               <td><img style="width: 120px" src="assets/{{item.imageURL}}" alt=""></td>
               <td style="width: 12%;">{{item.price }}</td>
               <td style="width: 12%;">
-                <button class="btn btn-warning" (click)="increaseQuantity(item)">+</button>
-                {{item.quantity}}
                 <button class="btn btn-warning" (click)="decreaseQuantity(item)">-</button>
+                {{item.quantity}}
+                <button class="btn btn-warning" (click)="increaseQuantity(item)">+</button>
               </td>
               <td style="width: 12%;">{{item.total}}</td>
               <td>

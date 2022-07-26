@@ -18,7 +18,7 @@
           <tbody>
             <tr *ngFor="let item of product;let i = index">
               <td>{{i+1}}</td>
-              <td>{{item.title}}</td>
+              <td>{{item.name}}</td>
               <td> <img style="width: 120px" src="assets/{{item.imageURL}}" alt=""> </td>
               <td style="width: 25%;">{{ item.description }}</td>
               <td style="width: 12%;">{{item.price }}</td>
@@ -29,7 +29,7 @@
             </tr>
               <tr>
                 <td colspan="4"></td>
-                <td><button (click)="emptycart()" class="btn btn-danger">Empty Wishlist</button></td>
+                <td><button (click)="emptyWishlist()" class="btn btn-danger">Empty Wishlist</button></td>
                 <td><button routerLink="/home" class="btn btn-primary">Add more items</button></td>
                 <td><button class="btn btn-success">Check Out</button></td>
               </tr>

@@ -10,6 +10,9 @@ import { AdminComponent } from './component/admin/admin.component';
 import { HomeComponent } from './component/home/home.component';
 import { ProductCategoryComponent } from './component/product-category/product-category.component';
 import { WishlistComponent } from './component/wishlist/wishlist.component';
+import { EditProductComponent } from './component/manage/edit-product/edit-product.component';
+import { EditUsersComponent } from './component/manage/edit-users/edit-users.component';
+import { DiscountComponent } from './component/discount/discount.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -24,6 +27,9 @@ const routes: Routes = [
   {path:'product/category', component: ProductCategoryComponent},
   {path:'cart' , component: CartComponent},
   {path:'wishlist' , component: WishlistComponent},
+  {path:'discount' , component: DiscountComponent},
+  {path:'edit/product/:id' , component: EditProductComponent},
+  {path:'edit/user/:id' , component: EditUsersComponent},
 
 ];
 

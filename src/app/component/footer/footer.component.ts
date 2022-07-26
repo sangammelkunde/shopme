@@ -12,4 +12,12 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isLoggedIn(){
+    return window.localStorage.getItem("login") === "true";
+  }
+
+  confirmRole(){
+    return window.localStorage.getItem('role')==='USER';
+  }
+
 }

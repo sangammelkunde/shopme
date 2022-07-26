@@ -12,6 +12,7 @@ import { HomeComponent } from '../home/home.component';
 export class ProductCategoryComponent implements OnInit {
 
   public productList: any;
+  private sortedAsc: boolean = true;
 
   constructor(private api : ApiService, private cartService : CartService, private router: Router) { }
 
@@ -34,9 +35,8 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   sortProducts(){
-    this.productList.sort((a: { price: number; }, b: { price: number; }) => {
-      return a.price - b.price;
-  });
+    this.productList = this.sortedAsc ? this.productList.sort((a: any, b: any) => (a.price > b.price) ? -1 : 1) : this.productList.sort((a: any, b: any) => (a.price < b.price) ? -1 : 1)
+    this.sortedAsc = !this.sortedAsc
   }
 
 }

@@ -1,5 +1,6 @@
 <div class="container">
   <div class="row">
+    <button class="btn sortBtn" (click)="sortProducts()">Sort</button>
     <ng-container *ngFor="let item of productList">
       <div class="card col-md-2">
         <img src="/assets/{{item.imageURL}}" alt="">

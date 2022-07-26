@@ -1,15 +1,17 @@
-<div class="col-md-6 col-sm-12">
-  <div class="search-form">
-     <form [formGroup]="searchForm"  (ngSubmit)="getProducts()" name="form1">
-        <div class="form-group">
-           <input formControlName="category" type="text" class="form-control" required minlength="4" placeholder="Type Search Category">
+  <div class="search-form" style="margin-right:10%; margin-left:10%">
+     <form [formGroup]="searchForm" (ngSubmit)="getProducts()" name="form1">
+        <div class="form-group btn-container">
+          <input formControlName="category" type="text" class="form-control" required minlength="4" placeholder="Type Search Category">
+          <button type="submit" class="btn btn-success" style="margin-top:10px; margin-right:10px;">Get Products</button>
         </div>
-        <button type="submit" class="btn btn-success" >Get Products</button>
-        <button class="btn btn-success" (click)="addButtonClicked()" >Add new Product</button>
+        <div class="btn-container">
+          <button class="btn btn-success" (click)="addButtonClicked()" style="margin-top:10px; margin-right:10px;" >Add new Product</button>
+          <button class="btn btn-success" (click)="addMultipleButtonClicked()" style="margin-top:10px; margin-right:10px;" >Add mutiple Products</button>
+          <button class="btn btn-success" (click)="getStocksButtonClicked();getStocks()" style="margin-top:10px;" >Get Product Stocks</button>
+      </div>
      </form>
   </div>
-</div>
-<div class="productcontainer" *ngIf="!addButtonClickedFlag">
+<div class="productcontainer" *ngIf="!addButtonClickedFlag && !addMultipleButtonClickedFlag && !getStocksButtonClickedFlag">
   <table class="table">
     <thead>
       <tr>
@@ -34,13 +36,13 @@
         <td>{{product.stock}}</td>
         <td>{{product.imageURL}}</td>
         <td>
-          <a href="#">
-            <i class='fas fa-user-edit' onclick="editProduct(product.productId)"></i>
+          <a>
+            <i id={{product.productId}} class='btn btn-warning fas fa-user-edit edit' (click)="editProduct($event)" style="cursor:pointer;"></i>
           </a>
         </td>
         <td>
-          <a href="#">
-            <i class="material-icons" style="color:red">delete</i>
+          <a>
+            <i id={{product.productId}} class="btn btn-danger material-icons" style="color:red"  (click)="deleteProduct($event)" style="cursor:pointer;">delete</i>
           </a>
         </td>
     </tr>
@@ -79,7 +81,45 @@
         <input formControlName="stock" type="text" class="form-control" required  minlength="4" placeholder="Enter product stock" />
       </div>
       <button type="submit" class="btn btn-success" > Add </button>
-      <button class="btn btn-danger" routerLink="/manage/products" (click)="cancelButtonClicked()"> Cancel </button>
+      <button class="btn btn-danger" routerLink="admin/manage/products" (click)="cancelButtonClicked()"> Cancel </button>
     </form>
   </div>
+</div>
+
+<div class="add-product-container"  *ngIf="addMultipleButtonClickedFlag">
+  <div class="add-product-main-text">
+    <h2 style="text-align:center">Add Mutiple Products</h2>
+  </div>
+  <div class="login-form">
+    <form [formGroup]="addMultipleProductsForm" (ngSubmit)="addMultipleProducts()" name="form1">
+      <div class="form-group">
+        <label for="name">Products CSV</label>
+        <input formControlName="csv" type="text" class="form-control" required  minlength="4" placeholder="Enter product csv list" />
+      </div>
+      <button type="submit" class="btn btn-success" > Add </button>
+      <button class="btn btn-danger" routerLink="admin/manage/products" (click)="cancelButtonClicked()"> Cancel </button>
+      </form>
+      </div>
+</div>
+
+<div class="add-product-container"  *ngIf="getStocksButtonClickedFlag">
+  <div class="add-product-main-text">
+    <h2 style="text-align:center">Get Stock Details</h2>
+  </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Sr. No.</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Stock count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of stocks; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{stock.productName}}</td>
+          <td>{{stock.stock}}</td>
+      </tr>
+      </tbody>
+    </table>
 </div>

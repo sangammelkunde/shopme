@@ -12,7 +12,7 @@ export class CartService {
   public productWishList = new BehaviorSubject<any>([]);
 
   constructor() { }
-  
+
   getProduct(){
     return this.productList.asObservable();
   }
@@ -58,6 +58,20 @@ export class CartService {
     this.productList.next(this.cartItemList);
   }
 
+  removeWishListItem(product: any){
+    this.wishList.map((a:any, index:any)=>{
+      if(product.id== a.id){
+        this.wishList.splice(index,1);
+      }
+    })
+
+    this.productWishList.next(this.wishList);
+  }
+
+  removeAllWishlist(){
+    this.wishList = []
+    this.productWishList.next(this.wishList);
+  }
 
 
   removeAllCart(){

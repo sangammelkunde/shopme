@@ -12,8 +12,12 @@ export class ManageProductsComponent implements OnInit {
 
   searchForm!: FormGroup;
   addProductForm!: FormGroup;
+  addMultipleProductsForm!: FormGroup;
   retData: any;
+  stocks: any;
   addButtonClickedFlag: boolean = false;
+  addMultipleButtonClickedFlag: boolean = false;
+  getStocksButtonClickedFlag: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private _http: HttpClient,
     private router: Router) {}
@@ -30,6 +34,9 @@ export class ManageProductsComponent implements OnInit {
       category: [''],
       image: [''],
       stock: [''],
+    });
+    this.addMultipleProductsForm = this.formBuilder.group({
+      csv: [''],
     });
   }
 
@@ -68,27 +75,66 @@ export class ManageProductsComponent implements OnInit {
         imageURL: this.addProductForm.value.image,
         stock: this.addProductForm.value.stock
       }, {headers}).subscribe(data => {
-        // this.retData = data;
         console.log(data)
         if(data !== undefined) {
           this.getAllProducts();
           this.addButtonClickedFlag = false;
+          this.addMultipleButtonClickedFlag = false;
+          this.getStocksButtonClickedFlag = false;
         }
-        // this.loginForm.reset();
-        // if("ADMIN" === this.retData){
-        //   this.router.navigate(['/admin']);
-        // } else {
-        //   this.router.navigate(['/home']);
-        // }
     })
   }
 
   addButtonClicked(){
-    this.addButtonClickedFlag = !this.addButtonClickedFlag;
+    this.addButtonClickedFlag = true;
+  }
+
+  addMultipleButtonClicked(){
+    this.addMultipleButtonClickedFlag = true;
+  }
+
+  getStocksButtonClicked(){
+    this.getStocksButtonClickedFlag = true;
   }
 
   cancelButtonClicked(){
-    this.addButtonClickedFlag = !this.addButtonClickedFlag;
+    this.addButtonClickedFlag = false;
+    this.addMultipleButtonClickedFlag = false;
+    this.getStocksButtonClickedFlag = false;
+  }
+
+  editProduct(event: any){
+    this.router.navigate(['/edit/product', event.target.id as number]);
+  }
+
+  async deleteProduct(event: any){
+    if(confirm('Are you sure you want to delete this product?')){
+      const headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' };
+        this._http.delete<any>('http://localhost:8081/delete/product?productId='.concat(event.target.id), {headers}).subscribe(data => {
+          this.retData = this.getAllProducts();
+      })
+    }
+  }
+
+  async addMultipleProducts(){
+    console.log(this.addMultipleProductsForm.value.csv)
+    const headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' };
+    this._http.post<any>('http://localhost:8081/add/products', this.addMultipleProductsForm.value.csv, {headers}).subscribe(data => {
+        console.log(data)
+        if(data !== undefined) {
+          this.getAllProducts();
+          this.addButtonClickedFlag = false;
+          this.addMultipleButtonClickedFlag = false;
+          this.getStocksButtonClickedFlag = false;
+        }
+    })
+  }
+
+  async getStocks(){
+    const headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' };
+      this._http.get<any>('http://localhost:8081/stocks', {headers}).subscribe(data => {
+        this.stocks = data;
+  })
   }
 
 }

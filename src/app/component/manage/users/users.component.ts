@@ -25,19 +25,17 @@ export class UsersComponent implements OnInit {
     })
   }
 
-  editUser(userid: number){
-    // const headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' };
-    // this._http.post<any>('http://localhost:8080/login', { username: document.getElementById, password: this.loginForm.value.password}, {headers}).subscribe(data => {
-    //   this.retData = data.role;
-    //   console.log(this.retData)
-    //   window.sessionStorage.setItem('login', 'true');
-    //   // this.loginForm.reset();
-    //   if("ADMIN" === this.retData){
-    //     this.router.navigate(['/admin']);
-    //   } else {
-    //     this.router.navigate(['/products']);
-    //   }
-    // })
+  editUser(event: any){
+    this.router.navigate(['/edit/user', event.target.id as number]);
+  }
+
+  async deleteUser(event: any){
+    if(confirm('Are you sure you want to delete this product?')){
+      const headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' };
+        this._http.delete<any>('http://localhost:8080/delete/user?userId='.concat(event.target.id), {headers}).subscribe(data => {
+          this.retData = this.getUsers();
+      })
+    }
   }
 
 }

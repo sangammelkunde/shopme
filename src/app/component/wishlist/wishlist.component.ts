@@ -19,7 +19,11 @@ export class WishlistComponent implements OnInit {
     })
   }
   removeItem(item: any){
-    this.cartService.removeCartItem(item);
+    this.cartService.removeWishListItem(item);
+  }
+
+  emptyWishlist(){
+    this.cartService.removeAllWishlist();
   }
 
   emptycart(){

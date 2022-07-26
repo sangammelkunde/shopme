@@ -24,10 +24,10 @@
         <h4>Fashion</h4>
       </a>
     </div>
-    <div class="item" (click)="showCategory('jewellery')">
+    <div class="item" (click)="showCategory('Watch')">
       <a >
-        <img class="img-container" src="https://images.naptol.com/usr/local/csp/staticContent/product_images/horizontal/750x750/Shubh-Muhurat-Jewellery-Collection-1.jpg" alt="">
-        <h4>Jewellery</h4>
+        <img class="img-container" src="assets/iwatch7.jpg" alt="">
+        <h4>Watches</h4>
       </a>
     </div>
   </div>
@@ -39,12 +39,12 @@
   <div class="row">
     <ng-container *ngFor="let item of productList">
       <div class="card col-md-2">
+        <i class='fas fa-heart' style='font-size:20px;color:red;text-align:right' (click)=addToWishlist(item) *ngIf="confirmRole()"></i>
         <img src="/assets/{{item.imageURL}}" alt="">
         <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.name}}</h5>
         <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.description}}</p>
         <p><strong>Price:</strong>₹{{item.price}}</p>
         <button *ngIf="confirmRole()" class="btn btn-primary" (click)=addtoCart(item)>Add To Cart</button>
-        <button class="btn btn-primary wishlist" (click)=addToWishlist(item)>Add To wishlist</button>
     </div>
     </ng-container>
   </div>

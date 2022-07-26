@@ -18,6 +18,10 @@ export class HeaderComponent implements OnInit {
     .subscribe(res=>{
       this.totalItem = res.length;
     })
+    this.cartService.getWishlist()
+    .subscribe(res=>{
+      this.totalWishedItem = res.length;
+    })
   }
 
   isLoggedIn(){

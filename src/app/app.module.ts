@@ -18,6 +18,9 @@ import { HomeComponent } from './component/home/home.component';
 import { ProductCategoryComponent } from './component/product-category/product-category.component';
 import { WishlistComponent } from './component/wishlist/wishlist.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { EditProductComponent } from './component/manage/edit-product/edit-product.component';
+import { EditUsersComponent } from './component/manage/edit-users/edit-users.component';
+import { DiscountComponent } from './component/discount/discount.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { FooterComponent } from './component/footer/footer.component';
     HomeComponent,
     ProductCategoryComponent,
     WishlistComponent,
-    FooterComponent
+    FooterComponent,
+    EditProductComponent,
+    EditUsersComponent,
+    DiscountComponent
   ],
   imports: [
     BrowserModule,

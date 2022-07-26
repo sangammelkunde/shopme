@@ -18,3 +18,8 @@
   color: blue;
   font-weight: bold;
 }
+
+.navbar{
+  padding-left: 20px;
+  padding-right: 20px;
+}

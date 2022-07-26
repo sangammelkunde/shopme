@@ -16,14 +16,10 @@
         <td>{{user.userId}}</td>
         <td contenteditable>{{user.username}}</td>
         <td>
-          <a href="#">
-            <i class='fas fa-user-edit' onclick="editUser(user.userId)"></i>
-          </a>
+          <i id={{user.userId}} class='btn btn-warning fas fa-user-edit' (click)="editUser($event)" style="cursor:pointer;"></i>
         </td>
         <td>
-          <a href="#">
-            <i class="material-icons" style="color:red">delete</i>
-          </a>
+          <i id={{user.userId}} class="btn btn-danger material-icons" style="color:red" (click)="deleteUser($event)" style="cursor:pointer;">delete</i>
         </td>
     </tr>
     </tbody>
